@@ -9,12 +9,16 @@
             crossorigin="anonymous"></script>
 
 
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -24,24 +28,24 @@
             src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript"
             src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
     <script>
-$(document).ready(function(){
-    $('#myTable').dataTable();
-});
+
     </script>
+
     <style>
-        /* Always set the map height explicitly to define the size of the div
+         /* Always set the map height explicitly to define the size of the div
         * element that contains the map. */
-        #map {
-            height: 50%;
-            width: 100%;
-        }
-        /* Optional: Makes the sample page fill the window. */
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-        }
+         #map {
+             height: 50%;
+             width: 100%;
+         }
+         /* Optional: Makes the sample page fill the window. */
+         html, body {
+             height: 100%;
+             margin: 0;
+             padding: 0;
+         }
     </style>
 </head>
 <body>
@@ -69,6 +73,7 @@ $(document).ready(function(){
                 <li><a href="#"><span style="color: white;"><span class="glyphicon glyphicon-user"></span> Access Level:</span> <span class="text-danger"><strong>Administrator</strong></span></a></li>
                 <li>@Html.ActionLink("Logout", "LogOff", "Account", new { area = "" }, new { @class = "", })</li>
             </ul>
+
             <form class="navbar-form navbar-left">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search">
@@ -93,14 +98,17 @@ $(document).ready(function(){
             <li><a data-toggle="pill" href="#menu1">View Nasa Data</a></li>
             <li><a data-toggle="pill" href="#menu2">Emergency Queue</a></li>
         </ul>
+
         <div class="tab-content">
+
+
 
             <div id="home" class="tab-pane fade in active">
 
                 <div class="row">
                     <div class="col-sm-4">
                         <label>Time Event Occured:</label>
-                        <select class="selectpicker form-control">
+                        <select class="selectpicker form-control" id="timeO">
                             <option>12:00 AM</option>
                             <option>1:00 AM</option>
                             <option>2:00 AM</option>
@@ -120,7 +128,7 @@ $(document).ready(function(){
                         <div class="form-group">
                             <label for="usr">Time Event Reported:</label>
 
-                            <select class="selectpicker form-control">
+                            <select class="selectpicker form-control" id="timeR">
                                 <option>12:00 AM</option>
                                 <option>1:00 AM</option>
                                 <option>2:00 AM</option>
@@ -138,39 +146,52 @@ $(document).ready(function(){
                                 <option>11:00 AM</option>
                             </select>
                         </div>
-                        <label>Emergency:</label>
-                        <select class="selectpicker form-control">
-                            <option>No</option>
-                            <option>Yes</option>
+                        <label>Date Reported:</label>
+                        <div class="input-group date" data-provide="datepicker">
+                            <input type="text" class="form-control" disabled value="04-04-2017" id="dateReported">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
 
-                        </select>
-
+                        <div align="center">
+                            </br>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#popupx"> <span class="glyphicon glyphicon-eye-open"></span> View Reports</button>
+                            <button class="btn btn-danger"> <span class="glyphicon glyphicon-pencil"></span> Edit Reports</button>
+                        </div>
                     </div>
 
                     <div class="col-sm-4">
                         <label>Issue Reported:</label>
-                        <select class="selectpicker form-control">
+                        <select class="selectpicker form-control" id="issueReported">
                             <option>Animal Carcass</option>
                             <option>WildFire</option>
                             <option>Signs of Poaching</option>
                         </select>
                         <div class="form-group">
                             <label for="usr">Longitude:</label>
-                            <input class="form-control" placeholder="eg. 2.099" type="text">
+                            <input class="form-control" placeholder="eg. 2.099" type="text" id="longitude">
                         </div>
                         <label for="comment">Latitude:</label>
-                        <input class="form-control" placeholder="eg. 117.09789" type="text">
+                        <input class="form-control" placeholder="eg. 117.09789" type="text" id="latitude">
+                        <div id="succmsg" class=""> </div>
+
 
                     </div>
 
                     <div class="col-sm-4">
 
                         <div class="form-group">
+
                             <label for="comment">Comments <span class="text-danger">(Optional)<span></label>
-                            <textarea class="form-control" rows="5" id="comment"></textarea></br>
-                            <button class="btn btn-success btn-block"> Submit <span class="glyphicon glyphico-check"></span> </button>
+                            <textarea class="form-control" rows="5" id="comments"></textarea></br>
+
+                            <button class="btn btn-success btn-block" onclick="getInfo();"> Submit <span class="glyphicon glyphico-check"></span> </button>
                         </div>
+
+
                     </div>
+
 
 
                 </div>
@@ -274,12 +295,211 @@ $(document).ready(function(){
       function eqfeed_callback(results) {
         map.data.addGeoJson(results);
       }
+
+    $(document).ready(function(){
+     $('#myTable').dataTable();
+    $('#myTable2').dataTable();
+
+    });
+
+
+
+
+   //We want to call this function maybe every 30 secs to update database if internet goes out.
+   function update(){
+
+   }
+
+   function getDate(){
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if(dd<10) {
+      dd='0'+dd
+     }
+
+    if(mm<10) {
+      mm='0'+mm
+    }
+
+    today = mm+'/'+dd+'/'+yyyy;
+    return today;
+   }
+
+  function showReports(){
+    //.load from php page
+  }
+
+
+   function getInfo(){
+    var comments = $('#comments').val();
+    var longitude = $('#longitude').val();
+    var latitude = $('#latitude').val();
+    var issueReported = $('#issueReported').val();
+    var timeOccured = $('#timeO').val();
+    var timeReported = $('#timeR').val();
+
+    var numberLongitude = parseFloat(longitude);
+    var numberLatitude = parseFloat(latitude);
+
+    if(!isNaN(numberLatitude) && !isNaN(numberLongitude)) {
+      if(numberLatitude >= -90 && numberLatitude <= 90 && numberLongitude >= -180 && numberLongitude <= 180) {
+
+        var varData = 'comments=' + comments + '&longitude=' + longitude + "&latitude=" + latitude + "&issueReported=" + issueReported + "&timeOccured=" + timeOccured + "&timeReported=" + timeReported;
+
+         $.ajax({
+       type:"POST",
+       url: "./submit.php",
+       data: varData,
+       success: function(){
+         console.log("Success!");
+         $("#succmsg").html('</br><p class="alert alert-success" id="success-alert">Submit Successful</p>');
+         $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+         $("#success-alert").fadeOut(500);
+         });
+       }
+
+       });
+
+        var testJSON5 = {};
+          testJSON5.latitude = numberLatitude;
+          testJSON5.longitude = numberLongitude;
+          testJSON5.type = issueReported;
+          testJSON5.time = timeOccured;
+          testJSON5.date = "3/31/17";
+          testJSON5.reporter = "Me";
+          testJSON5.comment = comments;
+
+          customMarker(testJSON5, map);
+      }
+      else {
+        console.log("Please enter a valid number");
+      }
+    }
+    else {
+      console.log("please enter a number");
+    }
+
+   }
+
         </script>
+        <script type="text/javascript">
+      var icon = [];
+      icon["WildFire"] = "http://cdn.jsdelivr.net/emojione/assets/png/1F525.png";
+      icon["Animal Carcass"] = "http://icons.iconarchive.com/icons/martin-berube/flat-animal/64/cardinal-icon.png";
+      icon["Signs of Poaching"] = "http://icons.iconarchive.com/icons/martin-berube/flat-animal/64/frog-icon.png";
+      icon["shark"] = "http://icons.iconarchive.com/icons/martin-berube/flat-animal/64/shark-icon.png";
+
+      function customMarker(markerPrimitive, map) {
+          var image = icon[markerPrimitive.type];
+          var latLng = new google.maps.LatLng(markerPrimitive.latitude, markerPrimitive.longitude);
+          var marker = new google.maps.Marker({
+              position: latLng,
+              map: map,
+              icon: image
+            });
+          var contentString = "Time: " + markerPrimitive.time +
+                              "\nType: " + markerPrimitive.type +
+                              "\nReporter: " + markerPrimitive.reporter +
+                              "\nComments: " + markerPrimitive.comment;
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
+          this.marker = marker
+        }
+        </script>
+
+
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key= AIzaSyAa1MN5oSsprXw_Z2vpvcRrbnAEDvrS8PA&callback=initMap">
         </script>
 
-        @RenderBody()
 
     </body>
+
+
+
+    <div class="modal fade" id="popupx">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"> &times; </button>
+                    <h3 class="modal-title">Garamba Reports </h3>
+                </div>
+                <div class="modal-body">
+                    <div id="report">
+                        <div class="table-responsive">
+                            <table id="myTable2" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>TBD</th>
+                                        <th>TBD</th>
+                                        <th>TBD</th>
+                                        <th>TBD</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="info">
+                                        <td>001</td>
+                                        <td>Flooding</td>
+                                        <td>Mild</td>
+                                        <td>10000</td>
+                                    </tr>
+                                    <tr class="danger">
+                                        <td>002</td>
+                                        <td>WildFire</td>
+                                        <td>Severe</td>
+                                        <td>28000</td>
+                                    </tr>
+                                    <tr class="success">
+                                        <td>003</td>
+                                        <td>Poaching</td>
+                                        <td>N/A</td>
+                                        <td>7000</td>
+                                    </tr>
+                                    <tr class="warning">
+                                        <td>004</td>
+                                        <td>Carcass Found</td>
+                                        <td>N/A</td>
+                                        <td>18000</td>
+                                    </tr>
+                                    <tr class="active">
+                                        <td>005</td>
+                                        <td>Reported Disturbance</td>
+                                        <td>N/A</td>
+                                        <td>12000</td>
+                                    </tr>
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+
+
+        </div> <!-- END OF MODAL -->
+
+
+        @RenderBody()
+
+
 </html>
+
+
+
+
+
+
+
+
